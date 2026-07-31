@@ -1,0 +1,223 @@
+/* =====================================
+   PART 3B
+   Hearts • Gallery • Surprise
+===================================== */
+
+// ----------------------
+// Heart Cursor Trail
+// ----------------------
+
+document.addEventListener("mousemove",(e)=>{
+
+    const heart=document.createElement("div");
+
+    heart.className="heart";
+
+    heart.style.left=e.pageX+"px";
+
+    heart.style.top=e.pageY+"px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },5000);
+
+});
+
+// ----------------------
+// Sparkles
+// ----------------------
+
+setInterval(()=>{
+
+    const sparkle=document.createElement("div");
+
+    sparkle.className="sparkle";
+
+    sparkle.style.left=Math.random()*window.innerWidth+"px";
+
+    sparkle.style.top=Math.random()*window.innerHeight+"px";
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(()=>{
+        sparkle.remove();
+    },2000);
+
+},300);
+
+// ----------------------
+// Rose Petals
+// ----------------------
+
+setInterval(()=>{
+
+    const petal=document.createElement("div");
+
+    petal.className="petal";
+
+    petal.style.left=Math.random()*window.innerWidth+"px";
+
+    petal.style.animationDuration=
+    (5+Math.random()*6)+"s";
+
+    document.body.appendChild(petal);
+
+    setTimeout(()=>{
+        petal.remove();
+    },12000);
+
+},700);
+
+// ----------------------
+// Gallery Click Effect
+// ----------------------
+
+const images=document.querySelectorAll(".photos img");
+
+images.forEach(img=>{
+
+    img.addEventListener("click",()=>{
+
+        const overlay=document.createElement("div");
+
+        overlay.style.position="fixed";
+        overlay.style.inset="0";
+        overlay.style.background="rgba(0,0,0,.95)";
+        overlay.style.display="flex";
+        overlay.style.alignItems="center";
+        overlay.style.justifyContent="center";
+        overlay.style.zIndex="9999";
+
+        const photo=document.createElement("img");
+
+        photo.src=img.src;
+
+        photo.style.maxWidth="90%";
+        photo.style.maxHeight="90%";
+        photo.style.borderRadius="20px";
+        photo.style.boxShadow="0 0 40px hotpink";
+
+        overlay.appendChild(photo);
+
+        overlay.onclick=()=>overlay.remove();
+
+        document.body.appendChild(overlay);
+
+    });
+
+});
+
+// ----------------------
+// Surprise Button
+// ----------------------
+
+const surpriseBtn=
+document.getElementById("surpriseBtn");
+
+surpriseBtn.addEventListener("click",()=>{
+
+    document.body.style.transition="2s";
+
+    document.body.style.background="#000";
+
+    alert("❤️ Happy Girlfriend's Day Fiza ❤️");
+
+    launchFireworks();
+
+});
+
+// ----------------------
+// Simple Fireworks
+// ----------------------
+
+function launchFireworks(){
+
+    for(let i=0;i<120;i++){
+
+        const star=document.createElement("div");
+
+        star.style.position="fixed";
+
+        star.style.width="6px";
+
+        star.style.height="6px";
+
+        star.style.borderRadius="50%";
+
+        star.style.background=
+        `hsl(${Math.random()*360},100%,70%)`;
+
+        star.style.left="50%";
+        star.style.top="50%";
+
+        star.style.zIndex="9999";
+
+        document.body.appendChild(star);
+
+        const x=(Math.random()-0.5)*900;
+
+        const y=(Math.random()-0.5)*900;
+
+        star.animate([
+
+            {
+                transform:"translate(0,0)",
+                opacity:1
+            },
+
+            {
+                transform:`translate(${x}px,${y}px)`,
+                opacity:0
+            }
+
+        ],{
+
+            duration:2200,
+
+            easing:"ease-out"
+
+        });
+
+        setTimeout(()=>{
+
+            star.remove();
+
+        },2200);
+
+    }
+
+}
+
+// ----------------------
+// Easter Egg
+// ----------------------
+
+let taps=0;
+
+document.querySelector(".ending h1")
+.addEventListener("click",()=>{
+
+    taps++;
+
+    if(taps===7){
+
+        alert(
+`❤️ Secret Message ❤️
+
+Fiza,
+
+You're my favorite person,
+my favorite memory,
+and my favorite future.
+
+Forever Yours,
+Adii ❤️`
+        );
+
+        taps=0;
+
+    }
+
+});
