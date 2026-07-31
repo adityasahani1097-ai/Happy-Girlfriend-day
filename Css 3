@@ -1,0 +1,197 @@
+/* =====================================
+   OUR LITTLE UNIVERSE ❤️
+   Part 3A
+===================================== */
+
+// ----------------------
+// Elements
+// ----------------------
+
+const loginPage = document.getElementById("loginPage");
+const loadingPage = document.getElementById("loadingPage");
+const mainWebsite = document.getElementById("mainWebsite");
+
+const progress = document.querySelector(".progress");
+
+const letter = document.querySelector(".letter");
+
+const openLetterBtn = document.getElementById("openLetter");
+
+// ----------------------
+// Password
+// ----------------------
+
+function checkPassword(){
+
+    const password =
+    document.getElementById("password").value.trim();
+
+    if(password.toLowerCase() === "adiifiza"){
+
+        loginPage.style.display="none";
+
+        loadingPage.style.display="flex";
+
+        let width = 0;
+
+        let loading = setInterval(()=>{
+
+            width++;
+
+            progress.style.width = width+"%";
+
+            if(width>=100){
+
+                clearInterval(loading);
+
+                loadingPage.style.display="none";
+
+                mainWebsite.style.display="block";
+
+                window.scrollTo(0,0);
+
+            }
+
+        },30);
+
+    }
+
+    else{
+
+        alert("Wrong Password ❤️");
+
+    }
+
+}
+
+// ----------------------
+// Envelope
+// ----------------------
+
+openLetterBtn.addEventListener("click",()=>{
+
+    letter.style.display="block";
+
+    letter.animate([
+
+        {opacity:0,transform:"translateY(40px)"},
+
+        {opacity:1,transform:"translateY(0px)"}
+
+    ],{
+
+        duration:1000,
+
+        fill:"forwards"
+
+    });
+
+});
+
+// ----------------------
+// Love Counter
+// ----------------------
+
+const togetherDate =
+new Date("June 23, 2026 00:00:00").getTime();
+
+function updateCounter(){
+
+    const now =
+    new Date().getTime();
+
+    const diff = now - togetherDate;
+
+    const days =
+    Math.floor(diff/(1000*60*60*24));
+
+    const years =
+    Math.floor(days/365);
+
+    const months =
+    Math.floor((days%365)/30);
+
+    const remainingDays =
+    (days%365)%30;
+
+    const hours =
+    new Date().getHours();
+
+    const minutes =
+    new Date().getMinutes();
+
+    const seconds =
+    new Date().getSeconds();
+
+    document.getElementById("loveCounter").innerHTML=
+
+    `
+    <div>${years}<br>Years</div>
+
+    <div>${months}<br>Months</div>
+
+    <div>${remainingDays}<br>Days</div>
+
+    <div>${hours}<br>Hours</div>
+
+    <div>${minutes}<br>Minutes</div>
+
+    <div>${seconds}<br>Seconds</div>
+    `;
+
+}
+
+setInterval(updateCounter,1000);
+
+updateCounter();
+
+// ----------------------
+// Typewriter Letter
+// ----------------------
+
+const letterText = `
+
+Happy Girlfriend's Day Fiza ❤️
+
+From the day you came into my life,
+everything became brighter.
+
+Thank you for every smile,
+every laugh,
+every hug,
+every memory.
+
+I don't know what tomorrow holds...
+
+But I know I want every tomorrow
+to have you in it.
+
+Forever Yours,
+
+Adii ❤️
+
+`;
+
+function typeWriter(){
+
+    let i=0;
+
+    letter.innerHTML="";
+
+    function typing(){
+
+        if(i<letterText.length){
+
+            letter.innerHTML+=letterText.charAt(i);
+
+            i++;
+
+            setTimeout(typing,35);
+
+        }
+
+    }
+
+    typing();
+
+}
